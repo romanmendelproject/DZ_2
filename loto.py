@@ -6,13 +6,14 @@ class Card:
     def SetCard(self):
         card_array = []
         x, y = 0, 9
+#       формируем массив номеров в карточке
         for i in range(9):
             card_array_item = []
             for j in range(2):
                 while True:
-                    card_item = random.randint(x, y)
                     if x == 0:
                         x += 1
+                    card_item = random.randint(x, y)
                     if card_item not in card_array_item:
                         card_array_item.append(card_item)
                         break
@@ -23,16 +24,28 @@ class Card:
             y += 10
             if y == 89:
                 y += 1
-        for z in range(3):
+#       удаляем лишние номера
+        for i in range(3):
             while True:
                 card_array_item = random.randint(0, 8)
                 if isinstance(card_array[card_array_item][1], int):
                     card_array[card_array_item][1] = " "
                     break
-                else:
-                    continue
-        for i in range(9):
-            random.shuffle(card_array[i])
+#       раскидываем по 5 чисел в строке
+        for i in range(4):
+            while True:
+                card_array_item = random.randint(0, 8)
+                if isinstance(card_array[card_array_item][0], int):
+                    card_array[card_array_item][2] = card_array[card_array_item][0]
+                    card_array[card_array_item][0] = " "
+                    break
+        while True:
+            card_array_item = random.randint(0, 8)
+            if isinstance(card_array[card_array_item][1], int) and isinstance(card_array[card_array_item][2], str):
+                card_array[card_array_item][2] = card_array[card_array_item][1]
+                card_array[card_array_item][1] = " "
+                break
+
         self.card_array = card_array
 
     def GetCard(self, username, user_card):
@@ -80,18 +93,15 @@ class Kegs:
 
 if __name__ == '__main__':
     Keg = Kegs()
-    player = Players('Игрок')
+    player = Players('Человек')
     comp = Players('Компьютер')
     player.SetCard()
-    print("\r")
     comp.SetCard()
-    print(player.card_array)
-    print(comp.card_array)
+    print("\r")
     while True:
         num_keg = next(Keg.keg_gen)
         player.GetCard(player.name, player.card_array)
         comp.GetCard(comp.name, comp.card_array)
-
         input_player = input('Зачеркнуть цифру? (y/n)')
         if input_player == 'y':
             if player.search(player.card_array, num_keg):
@@ -106,6 +116,3 @@ if __name__ == '__main__':
                 sys.exit(1)
             elif comp.search(comp.card_array, num_keg):
                 continue
-        else:
-            print('Введите y or n')
-            continue
