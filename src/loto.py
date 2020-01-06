@@ -1,6 +1,7 @@
 import sys
 from engine import Kegs, Players
 
+
 if __name__ == '__main__':
     Keg = Kegs()
     player = Players('Человек')

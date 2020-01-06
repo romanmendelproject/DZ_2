@@ -1,5 +1,6 @@
 import random
 import sys
+from constants import row_card, column_card
 
 
 class Card:
@@ -17,7 +18,7 @@ class Card:
 #       формируем массив номеров в карточке
         for i in range(end_decade):
             card_array_item = []
-            for j in range(2):
+            for j in range(row_card-1):
                 while True:
                     if start_decade == 0:
                         start_decade += 1
@@ -33,7 +34,7 @@ class Card:
             if end_decade == penult_barrel:  # учитываем 90 в последней декаде
                 end_decade = last_barrel
 #       после формирования массива остается 3 лишних числа, заменяем их рандомно.
-        for i in range(3):
+        for i in range(row_card):
             while True:
                 card_array_item = random.randint(0, 8)
                 if isinstance(card_array[card_array_item][1], int):
@@ -57,17 +58,27 @@ class Card:
         self.card_array = card_array
 
     def GetCard(self, username, user_card):
+        """
+        Выводим карточку на экран в читабельном виде
+        username - имя пользователя(Компьютер или Человек)
+        user_card - сформированный методом SetCard массив чисел 
+        """
         print('{:#^35}'.format(" "+self.name+" "))
-        for j in range(3):
+        for j in range(row_card):
             if j > 0:
                 print(f"\r")
-            for i in range(9):
+            for i in range(column_card):
                 print(f"{user_card[i][j]:3}", end=" ")
         print(f"\n{'#'*35}")
 
     def search(self, user_card, num_keg):
-        for j in range(9):
-            for i in range(3):
+        """
+        Выполняем поиск выпавшего числа.
+        user_card - сформированный методом SetCard массив чисел
+        num_keg - выпавшее число
+        """
+        for j in range(column_card):
+            for i in range(row_card):
                 if user_card[j][i] == num_keg:
                     user_card[j][i] = "  X"
                     self.score += 1
