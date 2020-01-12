@@ -20,4 +20,25 @@
 </pre>
 <br/>
 После этого игроку предлагается ввести "y", если число присутсвует в его карточке или "n", если отсутсвует. Игра продолжается до тех пор, пока в одной из карточек не закроются все числа. Тот игрок, который первый закроет все числа в своей карточке становится победителем.<br/>
-
+<br/>
+Тестирование:<br/>
+<pre>
+$ pytest -v
+=========================test session starts==========================
+platform win32 -- Python 3.8.1, pytest-5.3.2, py-1.8.1, pluggy-0.13.1 -- c:\users\sa\appdata\local\programs\python\python38\python.exe
+cachedir: .pytest_cache
+rootdir: C:\web_python\DZ_2
+plugins: mock-1.13.0
+collected 11 items                                                                                                                  
+tests/test_engine.py::test_set_card_len_array_collumn PASSED    [  9%]
+tests/test_engine.py::test_set_card_len_array_row PASSED        [ 18%]
+tests/test_engine.py::test_set_card_number_sum PASSED           [ 27%]
+tests/test_engine.py::test_set_card_number_row_sum PASSED       [ 36%]
+tests/test_engine.py::test_set_card_number_col_sum PASSED       [ 45%]
+tests/test_engine.py::test_set_card_number_range PASSED         [ 54%]
+tests/test_engine.py::test_search_score PASSED                  [ 63%]
+tests/test_engine.py::test_search_remove_keg PASSED             [ 72%]
+tests/test_engine.py::test_search_replace_keg PASSED            [ 81%]
+tests/test_engine.py::test_get_keg_sum PASSED                   [ 90%]
+tests/test_engine.py::test_get_keg_range PASSED                 [100%]
+</pre>

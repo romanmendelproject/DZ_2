@@ -102,7 +102,7 @@ class Kegs:
         self.keg_gen = self.get_keg()
 
     def get_keg(self):
-        lst = [x for x in range(1, 90)]
+        lst = [x for x in range(1, 91)]
         random.shuffle(lst)
         for i, y in enumerate(lst):
             print('\n')
